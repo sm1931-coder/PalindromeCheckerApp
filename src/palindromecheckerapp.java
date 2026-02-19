@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.Queue;
+import java.util.LinkedList;
 import java.util.Stack;
 
 public class palindromecheckerapp {
@@ -8,20 +10,23 @@ public class palindromecheckerapp {
         System.out.print("Input: ");
         String input = sc.nextLine();
 
-        // Create stack to store characters
+        // Queue for FIFO
+        Queue<Character> queue = new LinkedList<>();
+
+        // Stack for LIFO
         Stack<Character> stack = new Stack<>();
 
-        // Push all characters into stack
+        // Insert characters into both structures
         for (char c : input.toCharArray()) {
-            stack.push(c);
+            queue.add(c);   // enqueue
+            stack.push(c);  // push
         }
 
-        // Assume palindrome initially
         boolean isPalindrome = true;
 
-        // Compare by popping from stack
-        for (char c : input.toCharArray()) {
-            if (c != stack.pop()) {
+        // Compare dequeue vs pop
+        while (!queue.isEmpty()) {
+            if (queue.remove() != stack.pop()) {
                 isPalindrome = false;
                 break;
             }
