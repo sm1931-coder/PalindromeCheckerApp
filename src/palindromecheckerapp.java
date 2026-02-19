@@ -1,53 +1,31 @@
-/**
- * ============================================================
- * MAIN CLASS – UseCase3PalindromeCheckerApp
- * ============================================================
- *
- * Use Case 3: Reverse String Based Palindrome Check
- *
- * Description:
- * This class checks whether a string is a palindrome
- * by reversing the string and comparing it with
- * the original value.
- *
- * Flow:
- * - Iterate the string in reverse order
- * - Build a reversed version using concatenation
- * - Compare original and reversed strings
- * - Display the validation result
- *
- * Key Concepts Used:
- * - Loop (for loop)
- * - String Immutability
- * - String Concatenation (+)
- * - equals() method
- *
- * Data Structure Used:
- * String
- *
- * @version 3.0
- */
+import java.util.Scanner;
 
 public class palindromecheckerapp {
-
-    /**
-     * Application entry point for UC3.
-     * @param args Command-line arguments
-     */
     public static void main(String[] args) {
 
-        String input = "radar";
-        String reversed = "";
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Input: ");
+        String input = sc.nextLine();
 
-        // Iterate from the last character to the first
-        for (int i = input.length() - 1; i >= 0; i--) {
-            reversed = reversed + input.charAt(i);
+        // Convert string into character array
+        char[] chars = input.toCharArray();
+
+        // Two-pointer approach
+        int start = 0;
+        int end = chars.length - 1;
+
+        boolean isPalindrome = true;
+
+        while (start < end) {
+            if (chars[start] != chars[end]) {
+                isPalindrome = false;
+                break;
+            }
+            start++;
+            end--;
         }
 
-        boolean isPalindrome = input.equals(reversed);
-
-        System.out.println("Input text: " + input);
-        System.out.println("Reversed text: " + reversed);
-        System.out.println("Is it a Palindrome? : " + isPalindrome);
+        System.out.println("Is Palindrome? : " + isPalindrome);
+        sc.close();
     }
 }
